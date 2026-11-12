@@ -10,7 +10,7 @@ This Flutter trivia app retrieves five easy, multiple-choice general-knowledge q
 
 ## Running the project
 1. Install Flutter and confirm `flutter doctor` is working.
-2. In this folder run `flutter create .` to generate the platform-specific scaffolding.
+2. The repository already includes Android and web platform configuration.
 3. Run `flutter pub get`.
 4. Run `flutter run -d chrome` (or select an Android emulator).
 5. For an Android APK, run `flutter build apk --release` and find it at `build/app/outputs/flutter-apk/app-release.apk`.
@@ -63,3 +63,17 @@ If I added score history later, I would save completed scores on the device and 
 5. `screenshots/05_score_update.png` — Score increased to 2 on Question 3.
 6. `screenshots/06_round_complete.png` — Completed five-question round with score 2/5.
 7. `screenshots/07_simulation_complete.png` — Simulation complete, explicitly without a cloud write.
+
+## Automated verification (November 11, 2026)
+
+After adding the widget tests, I ran `flutter pub get`, `flutter test`, and `flutter analyze` on my Mac. Flutter reported **4 tests passed** and **No issues found**. The automated checks exercise the loading state, HTTP failure and retry, API-level failure, single-answer scoring, round completion, and replay. These test results supplement the seven Chrome screenshots; they are not screenshots of those additional scenarios.
+
+To reproduce the checks, run:
+
+```bash
+flutter pub get
+flutter test
+flutter analyze
+```
+
+The tests use controlled responses so error and loading cases can be evaluated without relying on live network availability. The score-sync action remains a simulation, not a backend write.
