@@ -45,7 +45,10 @@ class TriviaQuestion {
 }
 
 class TriviaScreen extends StatefulWidget {
-  const TriviaScreen({super.key});
+  const TriviaScreen({super.key, this.fetchQuestions});
+
+  /// Optional request override for deterministic widget tests.
+  final Future<http.Response> Function(Uri uri)? fetchQuestions;
   @override
   State<TriviaScreen> createState() => _TriviaScreenState();
 }
@@ -81,7 +84,8 @@ class _TriviaScreenState extends State<TriviaScreen> {
       _syncing = false;
     });
     try {
-      final response = await http.get(_api).timeout(const Duration(seconds: 15));
+      final response = await (widget.fetchQuestions ?? http.get)(_api)
+          .timeout(const Duration(seconds: 15));
       if (response.statusCode != 200) {
         throw Exception('Server returned HTTP ${response.statusCode}.');
       }
