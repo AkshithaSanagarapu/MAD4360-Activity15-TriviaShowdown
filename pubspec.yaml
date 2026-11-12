@@ -1,0 +1,17 @@
+name: activity15_api_cloud_trivia
+description: CSC 4360 Activity 15 - API-to-Cloud Trivia Showdown
+publish_to: none
+version: 1.0.0+1
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.3.0
+  html_unescape: ^2.0.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+flutter:
+  uses-material-design: true
